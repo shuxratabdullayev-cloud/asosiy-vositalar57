@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asosiy Vositalar — Simulyator | FAXR MADAD KONSALT</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap');
+
+:root {
+  --primary: #1a237e;
+  --primary-light: #3949ab;
+  --accent: #ff6f00;
+  --accent-light: #ffa726;
+  --success: #2e7d32;
+  --success-light: #66bb6a;
+  --danger: #c62828;
+  --danger-light: #ef5350;
+  --bg: #f0f2f5;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --text-light: #5a5a7a;
+  --gold: #ffd600;
+  --shadow: 0 8px 32px rgba(26,35,126,0.12);
+  --radius: 16px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, var(--primary) 0%, #0d47a1 50%, #1565c0 100%);
+  color: #fff;
+  padding: 30px 20px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+  animation: rotateGlow 20s linear infinite;
+}
+@keyframes rotateGlow { to { transform: rotate(360deg); } }
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.header .subtitle {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  margin-top: 6px;
+  position: relative;
+  z-index: 1;
+}
+.brand {
+  margin-top: 10px;
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: var(--gold);
+  position: relative;
+  z-index: 1;
+}
+
+/* NAV TABS */
+.nav-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px;
+  background: #fff;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-btn {
+  padding: 8px 14px;
+  border: 2px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+.nav-btn:hover, .nav-btn.active {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26,35,126,0.3);
+}
+
+/* SECTIONS */
+.section {
+  display: none;
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeIn 0.4s ease;
+}
+.section.active { display: block; }
+@keyframes fadeIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+
+/* CARDS */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s;
+}
+.card:hover { transform: translateY(-3px); }
+.card h3 {
+  color: var(--primary);
+  margin-bottom: 12px;
+  font-size: 1.15rem;
+}
+
+/* INFOGRAFIKA */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+.info-item {
+  background: linear-gradient(145deg, #e8eaf6, #fff);
+  border-radius: 14px;
+  padding: 20px;
+  border-left: 5px solid var(--primary);
+  transition: all 0.3s;
+}
+.info-item:hover {
+  border-left-color: var(--accent);
+  transform: scale(1.02);
+}
+.info-item .icon { font-size: 2rem; margin-bottom: 8px; }
+.info-item h4 { color: var(--primary); margin-bottom: 6px; font-size: 1rem; }
+.info-item p { font-size: 0.88rem; color: var(--text-light); line-height: 1.5; }
+.info-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+}
+.flow-box {
+  background: var(--primary);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-align: center;
+  min-width: 130px;
+}
+.flow-arrow { font-size: 1.5rem; color: var(--accent); font-weight: 900; }
+.schyot-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 0.85rem;
+}
+.schyot-table th {
+  background: var(--primary);
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+}
+.schyot-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.schyot-table tr:hover td { background: #e8eaf6; }
+
+/* FLASHCARDS */
+.flash-container { perspective: 1000px; margin: 20px auto; max-width: 500px; }
+.flash-card {
+  width: 100%;
+  min-height: 220px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  cursor: pointer;
+}
+.flash-card.flipped { transform: rotateY(180deg); }
+.flash-front, .flash-back {
+  position: absolute;
+  width: 100%;
+  min-height: 220px;
+  backface-visibility: hidden;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  text-align: center;
+}
+.flash-front {
+  background: linear-gradient(135deg, var(--primary), #0d47a1);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.flash-back {
+  background: linear-gradient(135deg, var(--success), #1b5e20);
+  color: #fff;
+  transform: rotateY(180deg);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.flash-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+.flash-nav button {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+.flash-prev { background: #e0e0e0; color: var(--text); }
+.flash-next { background: var(--accent); color: #fff; }
+.flash-nav button:hover { transform: scale(1.05); }
+.flash-counter { text-align: center; margin-top: 10px; color: var(--text-light); font-weight: 600; }
+.flash-hint { font-size: 0.8rem; opacity: 0.7; margin-top: 8px; }
+
+/* GAME */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.game-score, .game-timer, .game-progress {
+  background: var(--card);
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  font-size: 0.9rem;
+}
+.game-timer { color: var(--danger); }
+.game-question-box {
+  background: linear-gradient(135deg, #1a237e, #283593);
+  color: #fff;
+  padding: 24px;
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  text-align: center;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.game-question-box h3 { font-size: 1.1rem; line-height: 1.5; }
+.game-question-box .operation { font-size: 0.95rem; margin-top: 8px; opacity: 0.9; }
+.game-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.game-opt {
+  padding: 16px;
+  border: 3px solid #e0e0e0;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-align: center;
+  transition: all 0.3s;
+}
+.game-opt:hover { border-color: var(--primary); background: #e8eaf6; transform: scale(1.03); }
+.game-opt.correct { border-color: var(--success); background: #e8f5e9; color: var(--success); }
+.game-opt.wrong { border-color: var(--danger); background: #ffebee; color: var(--danger); }
+.game-opt.disabled { pointer-events: none; opacity: 0.7; }
+.game-start-screen {
+  text-align: center;
+  padding: 40px 20px;
+}
+.game-start-screen h2 { color: var(--primary); margin-bottom: 12px; }
+.game-start-screen p { color: var(--text-light); margin-bottom: 24px; }
+.btn-start {
+  padding: 14px 40px;
+  background: linear-gradient(135deg, var(--accent), #e65100);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: all 0.3s;
+  box-shadow: 0 4px 16px rgba(255,111,0,0.3);
+}
+.btn-start:hover { transform: scale(1.08); box-shadow: 0 6px 20px rgba(255,111,0,0.4); }
+
+/* RESULT SCREEN */
+.result-screen {
+  text-align: center;
+  padding: 30px;
+}
+.result-screen h2 { font-size: 1.8rem; margin-bottom: 10px; }
+.result-score {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--primary);
+  margin: 10px 0;
+}
+.result-bar {
+  width: 100%;
+  height: 20px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+.result-bar-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 1s ease;
+}
+.result-details { text-align: left; margin-top: 20px; }
+.result-item {
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.result-item.correct-item { background: #e8f5e9; border-left: 4px solid var(--success); }
+.result-item.wrong-item { background: #ffebee; border-left: 4px solid var(--danger); }
+
+/* TESTS */
+.test-question {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+.test-question h4 {
+  color: var(--primary);
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.test-option {
+  display: block;
+  padding: 11px 16px;
+  margin: 6px 0;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.test-option:hover { border-color: var(--primary); background: #e8eaf6; }
+.test-option.selected { border-color: var(--primary); background: #c5cae9; }
+.test-option.correct-ans { border-color: var(--success) !important; background: #e8f5e9 !important; color: var(--success); }
+.test-option.wrong-ans { border-color: var(--danger) !important; background: #ffebee !important; color: var(--danger); }
+
+.btn-check {
+  display: block;
+  margin: 20px auto 0;
+  padding: 12px 36px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: all 0.3s;
+}
+.btn-check:hover { background: var(--primary-light); transform: scale(1.05); }
+
+/* FIREWORKS */
+.firework-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .game-options { grid-template-columns: 1fr; }
+  .nav-btn { font-size: 0.7rem; padding: 6px 10px; }
+  .info-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Asosiy Vositalar — Simulyator</h1>
+  <div class="subtitle">0200-guruh schyotlari bo'yicha buxgalteriya hisobi</div>
+  <div class="brand">FAXR MADAD KONSALT BUXGALTERIYA MAKTABI</div>
+</div>
+
+<div class="nav-tabs">
+  <button class="nav-btn active" onclick="showSection('infografika')">Infografika</button>
+  <button class="nav-btn" onclick="showSection('fleshkarta')">Fleshkartalar</button>
+  <button class="nav-btn" onclick="showSection('game')">Debet yoki Kredit?</button>
+  <button class="nav-btn" onclick="showSection('test1')">Test 1 — Nazariya</button>
+  <button class="nav-btn" onclick="showSection('test2')">Test 2 — Tahliliy</button>
+  <button class="nav-btn" onclick="showSection('test3')">Test 3 — Provodkalar</button>
+</div>
+
+<!-- ====== 1. INFOGRAFIKA ====== -->
+<div class="section active" id="infografika">
+  <div class="card">
+    <h3>Asosiy vositalar (AV) nima?</h3>
+    <p style="color:var(--text-light);line-height:1.7;font-size:0.92rem;">
+      Asosiy vositalar — korxona uzoq vaqt mobaynida ishlab chiqarish, xizmat ko'rsatish, ma'muriy yoki ijaraga berish maqsadida foydalanadigan moddiy aktivlardir. Ular 0100–0199 schyotlarda hisobga olinadi, eskirishi esa 0200–0299 schyotlarda aks ettiriladi. AV sifatida tan olinishi uchun xizmat muddati 1 yildan ortiq bo'lishi va qiymati hisob siyosatida belgilangan chegaradan yuqori bo'lishi kerak (5-son BHMS).
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>AV kelib tushish yo'llari</h3>
+    <div class="info-grid">
+      <div class="info-item"><div class="icon">🏭</div><h4>Sotib olish</h4><p>Mahalliy yetkazib beruvchidan yoki import orqali xarid qilish. Dt 0820 — Kt 6010.</p></div>
+      <div class="info-item"><div class="icon">🎁</div><h4>Tekinga olish</h4><p>Hadya shartnomasi asosida bepul olingan AV. Dt 0820 — Kt 8530.</p></div>
+      <div class="info-item"><div class="icon">🏗️</div><h4>Qurilish natijasi</h4><p>Qurilish yoki rekonstruksiya tugagach AV tarkibiga kiritiladi.</p></div>
+      <div class="info-item"><div class="icon">💼</div><h4>Ustav fondiga hissa</h4><p>Ta'sischilar AV ko'rinishida hissa qo'shadi. Dt 0820 — Kt 4610.</p></div>
+      <div class="info-item"><div class="icon">🔄</div><h4>Ayirboshlash</h4><p>Boshqa AV yoki TMZga almashtirilganda olinadi.</p></div>
+      <div class="info-item"><div class="icon">🔍</div><h4>Inventarizatsiya</h4><p>Tekshiruvda aniqlangan hisobga olinmagan AV. Dt 0100 — Kt 9390.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>AV harakatlanish jarayoni</h3>
+    <div class="info-flow">
+      <div class="flow-box">Kelib tushish<br><small>Dt 0820</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Ishga tushirish<br><small>Dt 0100 Kt 0820</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Eskirish hisoblash<br><small>Dt 2000-9000 Kt 0200</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Chiqib ketish<br><small>9210 schyot</small></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Asosiy schyotlar</h3>
+    <table class="schyot-table">
+      <thead><tr><th>Schyot</th><th>Nomi</th><th>Turi</th></tr></thead>
+      <tbody>
+        <tr><td><b>0100-0199</b></td><td>Asosiy vositalar (boshlang'ich qiymat)</td><td>Aktiv</td></tr>
+        <tr><td><b>0200-0299</b></td><td>Asosiy vositalar eskirishi</td><td>Kontr-aktiv</td></tr>
+        <tr><td><b>0820</b></td><td>Kapital qo'yilmalar (o'rnatish)</td><td>Aktiv</td></tr>
+        <tr><td><b>9210</b></td><td>AV chiqib ketishi</td><td>Tranzit</td></tr>
+        <tr><td><b>8530</b></td><td>Bepul olingan mulk (daromad)</td><td>Kapital</td></tr>
+        <tr><td><b>8510</b></td><td>Qayta baholash tuzatishlari</td><td>Kapital</td></tr>
+        <tr><td><b>4610</b></td><td>Ta'sischilardan olinadigan summalar</td><td>Aktiv</td></tr>
+        <tr><td><b>9310</b></td><td>AV chiqib ketishidan foyda</td><td>Daromad</td></tr>
+        <tr><td><b>9430</b></td><td>Boshqa operatsion xarajatlar</td><td>Xarajat</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>AV chiqib ketish yo'llari</h3>
+    <div class="info-grid">
+      <div class="info-item"><div class="icon">💰</div><h4>Realizatsiya (sotish)</h4><p>Tushum: Dt 4010 Kt 9210. Boshlang'ich qiymat: Dt 9210 Kt 0100.</p></div>
+      <div class="info-item"><div class="icon">🗑️</div><h4>Tugatish</h4><p>Eskirgan yoki yaroqsiz AV tugatiladi. Zarar 9430 da aks ettiriladi.</p></div>
+      <div class="info-item"><div class="icon">🎁</div><h4>Tekinga berish</h4><p>Bepul topshirilganda QQS hisoblanadi. Zarar 9430 schyotda.</p></div>
+      <div class="info-item"><div class="icon">❌</div><h4>Kamomad/yo'qolish</h4><p>Taqchillik aniqlansa: Dt 5910 Kt 9210 (aybdor shaxs aniqlanmaguncha).</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 2. FLESHKARTALAR ====== -->
+<div class="section" id="fleshkarta">
+  <div class="card" style="text-align:center;">
+    <h3>Fleshkartalar — Kartani bosing va javobni ko'ring</h3>
+    <p style="color:var(--text-light);font-size:0.88rem;">Kartani bosib ag'daring. Navigatsiya tugmalari bilan harakatlanish mumkin.</p>
+  </div>
+  <div class="flash-container">
+    <div class="flash-card" id="flashCard" onclick="flipCard()">
+      <div class="flash-front" id="flashFront">
+        <div id="flashQ"></div>
+        <div class="flash-hint">Javobni ko'rish uchun bosing</div>
+      </div>
+      <div class="flash-back" id="flashBack">
+        <div id="flashA"></div>
+      </div>
+    </div>
+  </div>
+  <div class="flash-nav">
+    <button class="flash-prev" onclick="prevFlash()">◀ Oldingi</button>
+    <button class="flash-next" onclick="nextFlash()">Keyingi ▶</button>
+  </div>
+  <div class="flash-counter" id="flashCounter"></div>
+</div>
+
+<!-- ====== 3. DEBET YOKI KREDIT O'YINI ====== -->
+<div class="section" id="game">
+  <div id="gameArea">
+    <div class="game-start-screen" id="gameStart">
+      <h2>🎯 Debet yoki Kredit?</h2>
+      <p>Xo'jalik operatsiyasini o'qing va 0200 guruhi (eskirish) schyoti debet yoki kredit tomonini to'g'ri tanlang. 20 ta savol, har biriga 15 soniya!</p>
+      <button class="btn-start" onclick="startGame()">O'yinni boshlash</button>
+    </div>
+    <div id="gamePlay" style="display:none;">
+      <div class="game-header">
+        <div class="game-score" id="gameScore">Ball: 0</div>
+        <div class="game-progress" id="gameProgress">1 / 20</div>
+        <div class="game-timer" id="gameTimer">⏱ 15s</div>
+      </div>
+      <div class="game-question-box">
+        <h3 id="gameQ"></h3>
+        <div class="operation" id="gameOp"></div>
+      </div>
+      <div class="game-options" id="gameOpts"></div>
+    </div>
+    <div id="gameResult" style="display:none;"></div>
+  </div>
+</div>
+
+<!-- ====== 4. TEST 1 — NAZARIYA ====== -->
+<div class="section" id="test1">
+  <div class="card"><h3>Test 1 — Nazariy savollar (10 ta)</h3><p style="color:var(--text-light);font-size:0.88rem;">Har bir savolga bitta to'g'ri javobni tanlang.</p></div>
+  <div id="test1Questions"></div>
+  <button class="btn-check" onclick="checkTest('test1')">Tekshirish</button>
+  <div id="test1Result" style="margin-top:20px;"></div>
+</div>
+
+<!-- ====== 5. TEST 2 — TAHLILIY ====== -->
+<div class="section" id="test2">
+  <div class="card"><h3>Test 2 — Tahliliy savollar (10 ta)</h3><p style="color:var(--text-light);font-size:0.88rem;">Noto'g'ri fikrni, xatoni yoki yetishmayotgan narsani toping.</p></div>
+  <div id="test2Questions"></div>
+  <button class="btn-check" onclick="checkTest('test2')">Tekshirish</button>
+  <div id="test2Result" style="margin-top:20px;"></div>
+</div>
+
+<!-- ====== 6. TEST 3 — PROVODKALAR ====== -->
+<div class="section" id="test3">
+  <div class="card"><h3>Test 3 — Buxgalteriya provodkalari (10 ta)</h3><p style="color:var(--text-light);font-size:0.88rem;">To'g'ri schyotlar korrespondensiyasini tanlang.</p></div>
+  <div id="test3Questions"></div>
+  <button class="btn-check" onclick="checkTest('test3')">Tekshirish</button>
+  <div id="test3Result" style="margin-top:20px;"></div>
+  <div style="text-align:center;margin:30px 0;padding:20px;background:linear-gradient(135deg,#1a237e,#0d47a1);border-radius:16px;color:#fff;">
+    <div style="font-weight:900;font-size:1.1rem;letter-spacing:2px;color:#ffd600;">FAXR MADAD KONSALT</div>
+    <div style="font-size:0.85rem;margin-top:6px;opacity:0.85;">Buxgalteriya maktabi — Bilim va amaliyot markazi</div>
+  </div>
+</div>
+
+<canvas class="firework-canvas" id="fireworkCanvas"></canvas>
+
+<script>
+// ============ AUDIO CONTEXT ============
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let audioCtx;
+function ensureAudio() { if (!audioCtx) audioCtx = new AudioCtx(); return audioCtx; }
+
+function playCorrectSound() {
+  const ctx = ensureAudio();
+  const now = ctx.currentTime;
+  // Happy ascending chime
+  [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.18, now + i*0.1);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + i*0.1 + 0.4);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start(now + i*0.1);
+    osc.stop(now + i*0.1 + 0.4);
+  });
+}
+
+function playWrongSound() {
+  const ctx = ensureAudio();
+  const now = ctx.currentTime;
+  // Descending buzz
+  [300, 220].forEach((freq, i) => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'square';
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.12, now + i*0.15);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + i*0.15 + 0.3);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start(now + i*0.15);
+    osc.stop(now + i*0.15 + 0.3);
+  });
+}
+
+function playVictoryMusic() {
+  const ctx = ensureAudio();
+  const now = ctx.currentTime;
+  const melody = [523,587,659,698,783,880,988,1046];
+  melody.forEach((f,i) => {
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'triangle';
+    o.frequency.value = f;
+    g.gain.setValueAtTime(0.15, now+i*0.12);
+    g.gain.exponentialRampToValueAtTime(0.001, now+i*0.12+0.35);
+    o.connect(g).connect(ctx.destination);
+    o.start(now+i*0.12);
+    o.stop(now+i*0.12+0.35);
+  });
+}
+
+function playTickSound() {
+  const ctx = ensureAudio();
+  const o = ctx.createOscillator();
+  const g = ctx.createGain();
+  o.type = 'sine';
+  o.frequency.value = 800;
+  g.gain.setValueAtTime(0.05, ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+  o.connect(g).connect(ctx.destination);
+  o.start();
+  o.stop(ctx.currentTime + 0.05);
+}
+
+function playTimerMusic() {
+  // Ticking background
+  if (window._tickInterval) clearInterval(window._tickInterval);
+  window._tickInterval = setInterval(playTickSound, 1000);
+}
+function stopTimerMusic() {
+  if (window._tickInterval) { clearInterval(window._tickInterval); window._tickInterval = null; }
+}
+
+// ============ FIREWORKS ============
+const fwCanvas = document.getElementById('fireworkCanvas');
+const fwCtx = fwCanvas.getContext('2d');
+let particles = [];
+let fwAnimating = false;
+
+function resizeFW() { fwCanvas.width = window.innerWidth; fwCanvas.height = window.innerHeight; }
+window.addEventListener('resize', resizeFW);
+resizeFW();
+
+function launchFireworks() {
+  fwAnimating = true;
+  const colors = ['#ff6f00','#ffd600','#2e7d32','#1a237e','#c62828','#00bcd4','#e91e63','#9c27b0'];
+  for (let b = 0; b < 5; b++) {
+    setTimeout(() => {
+      const cx = Math.random()*fwCanvas.width;
+      const cy = Math.random()*fwCanvas.height*0.5 + 50;
+      for (let i = 0; i < 40; i++) {
+        const angle = (Math.PI*2/40)*i;
+        const speed = 2 + Math.random()*4;
+        particles.push({
+          x: cx, y: cy,
+          vx: Math.cos(angle)*speed,
+          vy: Math.sin(angle)*speed,
+          life: 60 + Math.random()*30,
+          color: colors[Math.floor(Math.random()*colors.length)],
+          size: 2 + Math.random()*3
+        });
+      }
+    }, b * 300);
+  }
+  if (!window._fwLoop) animateFireworks();
+  setTimeout(() => { fwAnimating = false; }, 3000);
+}
+
+function animateFireworks() {
+  window._fwLoop = true;
+  fwCtx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += 0.04;
+    p.life--;
+    const alpha = Math.max(0, p.life / 90);
+    fwCtx.globalAlpha = alpha;
+    fwCtx.fillStyle = p.color;
+    fwCtx.beginPath();
+    fwCtx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+    fwCtx.fill();
+  });
+  fwCtx.globalAlpha = 1;
+  particles = particles.filter(p => p.life > 0);
+  if (particles.length > 0 || fwAnimating) {
+    requestAnimationFrame(animateFireworks);
+  } else {
+    fwCtx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+    window._fwLoop = false;
+  }
+}
+
+// ============ NAVIGATION ============
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach((b, i) => {
+    b.classList.remove('active');
+  });
+  const ids = ['infografika','fleshkarta','game','test1','test2','test3'];
+  const idx = ids.indexOf(id);
+  document.querySelectorAll('.nav-btn')[idx].classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// ============ FLASHCARDS ============
+const flashcards = [
+  {q:"Asosiy vositalar (AV) nima?", a:"Korxona uzoq vaqt mobaynida ishlab chiqarish, xizmat ko'rsatish yoki ma'muriy maqsadda foydalanadigan moddiy aktivlar (5-son BHMS)."},
+  {q:"AV qaysi schyotlarda hisobga olinadi?", a:"Boshlang'ich qiymat: 0100-0199 schyotlar. Eskirish: 0200-0299 schyotlar."},
+  {q:"0820 schyot nima uchun ishlatiladi?", a:"Kapital qo'yilmalar — AV sotib olinganda, tashilganda, o'rnatilganda xarajatlar shu schyotda yig'iladi."},
+  {q:"AV boshlang'ich qiymati nimadan iborat?", a:"Sotib olish narxi + barcha bog'liq xarajatlar (yetkazish, o'rnatish, boj, yig'imlar). Bank komissiyasi kiritilmaydi."},
+  {q:"9210 schyot nima uchun ishlatiladi?", a:"AV chiqib ketishi — sotish, tugatish, tekinga berish va boshqa chiqish operatsiyalari shu schyotda aks ettiriladi."},
+  {q:"Tekinga olingan AV qanday hisobga olinadi?", a:"Dt 0820 — Kt 8530. Adolatli (bozor) qiymatda qabul qilinadi. Keyin Dt 0100 — Kt 0820."},
+  {q:"AV amortizatsiyasi qachon boshlanadi?", a:"AV foydalanishga topshirilgan (ishga tushirilgan) oydan keyingi oyning 1-sanasidan boshlab hisoblanadi."},
+  {q:"AV sotilganda qanday provodka yoziladi?", a:"Tushum: Dt 4010 Kt 9210. Boshlang'ich qiymat: Dt 9210 Kt 0100. Eskirish: Dt 0200 Kt 9210."},
+  {q:"Ustav fondiga hissa sifatida AV kelsa?", a:"Dt 0820 — Kt 4610 (ta'sischilardan). Keyin ishga tushirilganda: Dt 0100 — Kt 0820."},
+  {q:"Inventarizatsiyada topilgan AV qanday kirim qilinadi?", a:"Dt 0100 — Kt 9390. Bozor (adolatli) qiymatida kirim qilinadi."},
+  {q:"AV eskirishi qaysi schyotlarda hisoblanadi?", a:"Dt 2010-2090 (xarajat) yoki 9430 — Kt 0200 (tegishli subschyotlar)."},
+  {q:"AV ichki harakatlanishi nima?", a:"AV korxona ichida bir bo'linmadan boshqasiga o'tkazilishi. Faqat analitik hisob o'zgaradi: Dt 0130(yangi) Kt 0130(eski)."},
+  {q:"AV kamomadi aniqlansa nima qilinadi?", a:"Dt 9210 Kt 0100 (boshlang'ich qiymat), Dt 0200 Kt 9210 (eskirish), Dt 5910 Kt 9210 (zarar — aybdor topilguncha)."},
+  {q:"AV tugatilganda qoldiq materiallar qanday hisoblanadi?", a:"Qoldiq material va ehtiyot qismlar: Dt 1040 — Kt 9210 schyotda kirim qilinadi."},
+  {q:"Qayta baholash saldosi (8510) qachon ishlatiladi?", a:"AV qayta baholanganda ortiqcha qiymat 8510 da aks etadi. AV chiqib ketganda 8510 hisobdan chiqariladi."},
+];
+
+let currentFlash = 0;
+function updateFlash() {
+  const fc = document.getElementById('flashCard');
+  fc.classList.remove('flipped');
+  document.getElementById('flashQ').textContent = flashcards[currentFlash].q;
+  document.getElementById('flashA').textContent = flashcards[currentFlash].a;
+  document.getElementById('flashCounter').textContent = (currentFlash+1) + ' / ' + flashcards.length;
+}
+function flipCard() { document.getElementById('flashCard').classList.toggle('flipped'); }
+function nextFlash() { currentFlash = (currentFlash+1) % flashcards.length; updateFlash(); }
+function prevFlash() { currentFlash = (currentFlash-1+flashcards.length) % flashcards.length; updateFlash(); }
+updateFlash();
+
+// ============ DEBET YOKI KREDIT O'YINI ============
+const gameQuestions = [
+  {q:"Dastgoh sotib olindi va kapital qo'yilmalarga kiritildi", op:"Dt 0820 — Kt 6010", ans:"Bu provodkada 0200 schyot ishtirok etmaydi", opts:["0200 debet yoziladi","0200 kredit yoziladi","0200 ishtirok etmaydi","0200 yopib qo'yiladi"], correct:2},
+  {q:"Yangi uskunaga oylik eskirish hisoblandi", op:"Ishlab chiqarish xarajatlari tarkibida", ans:"Eskirish hisoblanganda 0200 kreditga yoziladi", opts:["0200 debet yoziladi","0200 kredit yoziladi","0200 ishtirok etmaydi","0200 yopib qo'yiladi"], correct:1},
+  {q:"Sotilgan avtomobil eskirishi hisobdan chiqarildi", op:"Dt 0260 — Kt 9210", ans:"Eskirish hisobdan chiqarilganda 0200 debetga yoziladi", opts:["0200 kredit yoziladi","0200 ishtirok etmaydi","0200 debet yoziladi","0200 yopib qo'yiladi"], correct:2},
+  {q:"Yangi bino uchun oylik amortizatsiya hisoblandi", op:"Xarajatlarga o'tkazildi", ans:"Amortizatsiya hisoblanganda 0200 kreditga yoziladi", opts:["0200 ishtirok etmaydi","0200 debet yoziladi","0200 kredit yoziladi","0200 yopib qo'yiladi"], correct:2},
+  {q:"Tugatilgan dastgoh eskirishi hisobdan chiqarildi", op:"Dt 0230 — Kt 9210", ans:"Eskirish chiqarilganda 0200 debetga yoziladi", opts:["0200 debet yoziladi","0200 kredit yoziladi","0200 yopib qo'yiladi","0200 ishtirok etmaydi"], correct:0},
+  {q:"Tekinga berilgan kompyuter eskirishi chiqarildi", op:"Dt 0250 — Kt 9210", ans:"Eskirish chiqarilganda 0200 debetga yoziladi", opts:["0200 kredit yoziladi","0200 debet yoziladi","0200 ishtirok etmaydi","0200 yopib qo'yiladi"], correct:1},
+  {q:"Ofis jihozi uchun choraklik eskirish hisoblandi", op:"Ma'muriy xarajatlarga kiritildi", ans:"Eskirish hisoblanganda 0200 kreditga yoziladi", opts:["0200 ishtirok etmaydi","0200 yopib qo'yiladi","0200 debet yoziladi","0200 kredit yoziladi"], correct:3},
+  {q:"Ishga tushirilgan uskuna balansga qabul qilindi", op:"Dt 0130 — Kt 0820", ans:"Balansga qabul qilishda 0200 ishtirok etmaydi", opts:["0200 debet yoziladi","0200 ishtirok etmaydi","0200 kredit yoziladi","0200 yopib qo'yiladi"], correct:1},
+  {q:"Transport vositasiga oylik eskirish hisoblandi", op:"Dt 2010 — Kt 0260", ans:"Eskirish hisoblanganda 0200 kreditga yoziladi", opts:["0200 debet yoziladi","0200 yopib qo'yiladi","0200 kredit yoziladi","0200 ishtirok etmaydi"], correct:2},
+  {q:"Kamomad aniqlangan AV eskirishi hisobdan chiqarildi", op:"Dt 0230 — Kt 9210", ans:"Eskirish chiqarilganda 0200 debetga yoziladi", opts:["0200 kredit yoziladi","0200 ishtirok etmaydi","0200 yopib qo'yiladi","0200 debet yoziladi"], correct:3},
+  {q:"Ijaraga berilgan uskunaga eskirish hisoblandi", op:"Ijara xarajatlariga kiritildi", ans:"Eskirish hisoblanganda 0200 kreditga yoziladi", opts:["0200 kredit yoziladi","0200 debet yoziladi","0200 ishtirok etmaydi","0200 yopib qo'yiladi"], correct:0},
+  {q:"Qayta baholash natijasida eskirish tuzatildi", op:"0200 summasi o'zgartirildi", ans:"Qayta baholashda eskirish o'zgartirilganda 0200 debetga yoziladi", opts:["0200 ishtirok etmaydi","0200 debet yoziladi","0200 yopib qo'yiladi","0200 kredit yoziladi"], correct:1},
+  {q:"Ustav fondiga hissa sifatida AV qabul qilindi", op:"Dt 0820 — Kt 4610", ans:"Hissa qabul qilishda 0200 ishtirok etmaydi", opts:["0200 debet yoziladi","0200 kredit yoziladi","0200 ishtirok etmaydi","0200 yopib qo'yiladi"], correct:2},
+  {q:"Kompyuter jihozlariga oylik eskirish hisoblandi", op:"Dt 9430 — Kt 0250", ans:"Eskirish hisoblanganda 0200 kreditga yoziladi", opts:["0200 yopib qo'yiladi","0200 kredit yoziladi","0200 debet yoziladi","0200 ishtirok etmaydi"], correct:1},
+  {q:"Ayirboshlashda berilgan AV eskirishi chiqarildi", op:"Dt 0200 — Kt 9210", ans:"Eskirish chiqarilganda 0200 debetga yoziladi", opts:["0200 debet yoziladi","0200 ishtirok etmaydi","0200 kredit yoziladi","0200 yopib qo'yiladi"], correct:0},
+  {q:"Tekinga olingan uskunani balansga qabul qilish", op:"Dt 0130 — Kt 0820", ans:"Balansga qabul qilishda 0200 ishtirok etmaydi", opts:["0200 kredit yoziladi","0200 yopib qo'yiladi","0200 ishtirok etmaydi","0200 debet yoziladi"], correct:2},
+  {q:"Ishlab chiqarish uskunasiga yillik eskirish hisoblandi", op:"Dt 2310 — Kt 0230", ans:"Eskirish hisoblanganda 0200 kreditga yoziladi", opts:["0200 kredit yoziladi","0200 debet yoziladi","0200 yopib qo'yiladi","0200 ishtirok etmaydi"], correct:0},
+  {q:"Realizatsiya qilingan bino eskirishi chiqarildi", op:"Dt 0210 — Kt 9210", ans:"Eskirish chiqarilganda 0200 debetga yoziladi", opts:["0200 ishtirok etmaydi","0200 debet yoziladi","0200 kredit yoziladi","0200 yopib qo'yiladi"], correct:1},
+  {q:"AV ichki harakatlanishda eskirish ham ko'chirildi", op:"Dt 0230(yangi) Kt 0230(eski)", ans:"Ichki ko'chirishda 0200 debetga va kreditga yoziladi", opts:["0200 debet va kredit","0200 faqat debetga","0200 faqat kreditga","0200 ishtirok etmaydi"], correct:0},
+  {q:"AV dividendlar hisobiga berilganda eskirish chiqarildi", op:"Dt 0200 — Kt 9210", ans:"Eskirish chiqarilganda 0200 debetga yoziladi", opts:["0200 kredit yoziladi","0200 ishtirok etmaydi","0200 yopib qo'yiladi","0200 debet yoziladi"], correct:3},
+];
+
+let gameState = { current:0, score:0, answers:[], timer:null, timeLeft:15 };
+
+function startGame() {
+  gameState = { current:0, score:0, answers:[], timer:null, timeLeft:15 };
+  document.getElementById('gameStart').style.display = 'none';
+  document.getElementById('gameResult').style.display = 'none';
+  document.getElementById('gamePlay').style.display = 'block';
+  showGameQuestion();
+  playTimerMusic();
+}
+
+function showGameQuestion() {
+  if (gameState.current >= gameQuestions.length) { endGame(); return; }
+  const q = gameQuestions[gameState.current];
+  document.getElementById('gameQ').textContent = q.q;
+  document.getElementById('gameOp').textContent = q.op;
+  document.getElementById('gameScore').textContent = 'Ball: ' + gameState.score;
+  document.getElementById('gameProgress').textContent = (gameState.current+1) + ' / ' + gameQuestions.length;
+  gameState.timeLeft = 15;
+  document.getElementById('gameTimer').textContent = '⏱ 15s';
+  const optsDiv = document.getElementById('gameOpts');
+  optsDiv.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('div');
+    btn.className = 'game-opt';
+    btn.textContent = opt;
+    btn.onclick = () => selectGameAnswer(i);
+    optsDiv.appendChild(btn);
+  });
+  clearInterval(gameState.timer);
+  gameState.timer = setInterval(() => {
+    gameState.timeLeft--;
+    document.getElementById('gameTimer').textContent = '⏱ ' + gameState.timeLeft + 's';
+    if (gameState.timeLeft <= 5) document.getElementById('gameTimer').style.color = '#c62828';
+    else document.getElementById('gameTimer').style.color = '';
+    if (gameState.timeLeft <= 0) { clearInterval(gameState.timer); selectGameAnswer(-1); }
+  }, 1000);
+}
+
+function selectGameAnswer(idx) {
+  clearInterval(gameState.timer);
+  const q = gameQuestions[gameState.current];
+  const opts = document.querySelectorAll('#gameOpts .game-opt');
+  opts.forEach(o => o.classList.add('disabled'));
+  const isCorrect = idx === q.correct;
+  if (isCorrect) {
+    gameState.score++;
+    if (idx >= 0) opts[idx].classList.add('correct');
+    playCorrectSound();
+    launchFireworks();
+  } else {
+    if (idx >= 0) opts[idx].classList.add('wrong');
+    opts[q.correct].classList.add('correct');
+    playWrongSound();
+  }
+  gameState.answers.push({ qIdx: gameState.current, selected: idx, correct: q.correct, isCorrect });
+  gameState.current++;
+  setTimeout(showGameQuestion, 1200);
+}
+
+function endGame() {
+  stopTimerMusic();
+  document.getElementById('gamePlay').style.display = 'none';
+  const pct = Math.round(gameState.score / gameQuestions.length * 100);
+  let color = pct >= 80 ? 'var(--success)' : pct >= 50 ? 'var(--accent)' : 'var(--danger)';
+  let emoji = pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '📚';
+  let msg = pct >= 80 ? 'Ajoyib natija!' : pct >= 50 ? 'Yaxshi harakat!' : 'Yana mashq qiling!';
+  if (pct >= 80) { playVictoryMusic(); launchFireworks(); }
+
+  let html = '<div class="card result-screen">';
+  html += '<h2>' + emoji + ' ' + msg + '</h2>';
+  html += '<div class="result-score">' + gameState.score + ' / ' + gameQuestions.length + '</div>';
+  html += '<div style="color:var(--text-light)">' + pct + '% to\'g\'ri</div>';
+  html += '<div class="result-bar"><div class="result-bar-fill" style="width:'+pct+'%;background:'+color+'"></div></div>';
+  html += '<button class="btn-start" onclick="resetGame()" style="margin-top:16px">Qayta o\'ynash</button>';
+  html += '</div>';
+
+  html += '<div class="card"><h3>Batafsil natijalar</h3><div class="result-details">';
+  gameState.answers.forEach((a, i) => {
+    const q = gameQuestions[a.qIdx];
+    const cls = a.isCorrect ? 'correct-item' : 'wrong-item';
+    const icon = a.isCorrect ? '✅' : '❌';
+    html += '<div class="result-item ' + cls + '">';
+    html += '<b>' + icon + ' ' + (i+1) + '. ' + q.q + '</b><br>';
+    if (!a.isCorrect) {
+      html += '<span style="color:var(--danger)">Sizning javob: ' + (a.selected >= 0 ? q.opts[a.selected] : 'Vaqt tugadi') + '</span><br>';
+      html += '<span style="color:var(--success)">To\'g\'ri javob: ' + q.opts[q.correct] + '</span><br>';
+    }
+    html += '<small style="color:var(--text-light)">' + q.ans + '</small>';
+    html += '</div>';
+  });
+  html += '</div></div>';
+  document.getElementById('gameResult').innerHTML = html;
+  document.getElementById('gameResult').style.display = 'block';
+}
+
+function resetGame() {
+  document.getElementById('gameResult').style.display = 'none';
+  document.getElementById('gameStart').style.display = 'block';
+}
+
+// ============ TEST DATA ============
+const test1Data = [
+  {q:"AV tarkibiga kiritish uchun aktivning minimal xizmat muddati qancha?", opts:["Kamida 6 oy bo'lishi","Kamida 1 yildan ortiq","Kamida 3 yildan ortiq","Kamida 5 yildan ortiq"], correct:1},
+  {q:"AV boshlang'ich qiymatiga quyidagining qaysi biri kiritilmaydi?", opts:["Yetkazish xarajatlari","O'rnatish xarajatlari","Bank komissiya to'lovi","Bojxona boj yig'imlari"], correct:2},
+  {q:"AV eskirishi qaysi schyot guruhida hisobga olinadi?", opts:["0100-0199 schyotlarda","0200-0299 schyotlarda","0800-0899 schyotlarda","9200-9299 schyotlarda"], correct:1},
+  {q:"Tekinga olingan AV qaysi qiymatda hisobga olinadi?", opts:["Qoldiq qiymat bo'yicha","Adolatli qiymat bo'yicha","Sotib olish bahosida","Balans qiymati bo'yicha"], correct:1},
+  {q:"AV amortizatsiyasi qachon boshlab hisoblanadi?", opts:["Xarid qilingan kunidan","Shartnoma tuzilgan kun","Ishga tushgan oy boshi","Keyingi oyning 1-sanasi"], correct:3},
+  {q:"AV chiqib ketishi qaysi schyotda aks ettiriladi?", opts:["0820 kapital qo'yilma","9210 chiqib ketish sch","8530 bepul olingan mulk","4610 ta'sischi hissasi"], correct:1},
+  {q:"Kapital qo'yilmalar qaysi schyotda yig'iladi?", opts:["0100 asosiy vositalar","0200 eskirish schyotida","0820 kapital qo'yilmalar","9210 chiqib ketish sch"], correct:2},
+  {q:"AV bo'linmalar orasida ko'chirilganda nima o'zgaradi?", opts:["Boshlang'ich qiymati","Faqat analitik hisob","Eskirish usuli albatta","Balans qiymati to'liq"], correct:1},
+  {q:"Inventarizatsiyada topilgan AV qaysi schyot kreditlanadi?", opts:["8530 bepul olingan AV","9390 boshqa daromadlar","4610 ta'sischi hissasi","6010 yetkazib beruvchi"], correct:1},
+  {q:"AV tugatilganda qoldiq materiallar qanday hisobga olinadi?", opts:["Dt 1040 — Kt 9210 sch","Dt 9430 — Kt 1040 sch","Dt 9210 — Kt 1040 sch","Dt 0820 — Kt 1040 sch"], correct:0},
+];
+
+const test2Data = [
+  {q:"Quyidagining qaysi biri AV boshlang'ich qiymatini aniqlashda noto'g'ri?", opts:["Yetkazish kiritiladi","O'rnatish kiritiladi","Kredit foizi kiritiladi","Bojxona boji kiritiladi"], correct:2},
+  {q:"Buxgalter AV sotib olib to'g'ridan to'g'ri 0130 schyotga yozdi. Xato nimada?", opts:["Avval 0820 da yig'iladi","Avval 9210 da yig'iladi","Avval 0200 da yig'iladi","Avval 8530 da yig'iladi"], correct:0},
+  {q:"AV balansdan chiqarildi lekin eskirish chiqarilmadi. Nima yetishmayapti?", opts:["Dt 0200 Kt 9210 yozuvi","Dt 9210 Kt 0200 yozuvi","Dt 0100 Kt 0200 yozuvi","Dt 8530 Kt 0200 yozuvi"], correct:0},
+  {q:"Tekinga olingan AV xarid qiymatida hisobga olindi. Nima noto'g'ri?", opts:["Adolatli qiymatda bo'ladi","Qoldiq qiymatda bo'ladi","Balans qiymatida bo'ladi","Kelishilgan narx bo'ladi"], correct:0},
+  {q:"Buxgalter eskirishni AV xarid qilingan oydan boshlab hisobladi. Nima noto'g'ri?", opts:["Keyingi oydan boshlanadi","Oldingi oydan boshlanadi","Yil boshidan boshlanadi","Chorak boshida boshlanadi"], correct:0},
+  {q:"AV ichki ko'chirishda boshlang'ich qiymat o'zgartirildi. Bu to'g'rimi?", opts:["Yoq faqat analitik hisob","Ha boshlangich o'zgaradi","Ha eskirish ham o'zgaradi","Ha hammasi o'zgaradi"], correct:0},
+  {q:"Bank komissiyasi AV boshlang'ich qiymatiga kiritildi. Qanday tuzatsak bo'ladi?", opts:["9430 xarajatga o'tkazish","0820 schyotga o'tkazish","8530 schyotga o'tkazish","0200 schyotga o'tkazish"], correct:0},
+  {q:"Korxona AV guruhlarida turli qiymat chegarasi belgiladi. Nima noto'g'ri?", opts:["Yagona chegara bo'lishi","Guruhga qarab belgilash","Rahbar xohishiga qarab","Har yili o'zgartiriladi"], correct:0},
+  {q:"AV sotildi lekin QQS hisoblanmadi. Nima yetishmayapti?", opts:["Dt 9210 Kt 6410 yozuvi","Dt 6410 Kt 9210 yozuvi","Dt 4410 Kt 6410 yozuvi","Dt 9430 Kt 6410 yozuvi"], correct:0},
+  {q:"Tugatilgan AV dan olingan ehtiyot qismlar hisobga olinmadi. Nima yetishmayapti?", opts:["Dt 1040 Kt 9210 yozuvi","Dt 9210 Kt 1040 yozuvi","Dt 0820 Kt 1040 yozuvi","Dt 1040 Kt 0820 yozuvi"], correct:0},
+];
+
+const test3Data = [
+  {q:"Yetkazib beruvchidan dastgoh sotib olindi. To'g'ri provodka qaysi?", opts:["Dt 0820 — Kt 6010","Dt 0130 — Kt 6010","Dt 9210 — Kt 6010","Dt 0200 — Kt 6010"], correct:0},
+  {q:"Sotib olingan uskuna ishga tushirildi. To'g'ri provodka qaysi?", opts:["Dt 0130 — Kt 6010","Dt 0130 — Kt 0820","Dt 0820 — Kt 0130","Dt 0130 — Kt 9210"], correct:1},
+  {q:"Tekinga olingan AV qabul qilindi. To'g'ri provodka qaysi?", opts:["Dt 0820 — Kt 6010","Dt 0820 — Kt 4610","Dt 0820 — Kt 8530","Dt 0820 — Kt 9390"], correct:2},
+  {q:"Ishlab chiqarish uskunasiga eskirish hisoblandi. To'g'ri provodka qaysi?", opts:["Dt 2010 — Kt 0230","Dt 0230 — Kt 2010","Dt 9430 — Kt 0230","Dt 2010 — Kt 0130"], correct:0},
+  {q:"AV sotildi va tushum aks ettirildi. To'g'ri provodka qaysi?", opts:["Dt 5110 — Kt 9210","Dt 4010 — Kt 9210","Dt 9210 — Kt 4010","Dt 4010 — Kt 0130"], correct:1},
+  {q:"Sotilgan AV boshlang'ich qiymati hisobdan chiqarildi. To'g'ri provodka?", opts:["Dt 9210 — Kt 0130","Dt 0130 — Kt 9210","Dt 9430 — Kt 0130","Dt 9210 — Kt 0820"], correct:0},
+  {q:"Sotilgan AV eskirishi hisobdan chiqarildi. To'g'ri provodka qaysi?", opts:["Dt 9210 — Kt 0230","Dt 0230 — Kt 9210","Dt 0230 — Kt 0130","Dt 9430 — Kt 0230"], correct:1},
+  {q:"Ustav fondiga hissa sifatida AV qabul qilindi. To'g'ri provodka qaysi?", opts:["Dt 0820 — Kt 8530","Dt 0820 — Kt 4610","Dt 0820 — Kt 9390","Dt 0100 — Kt 4610"], correct:1},
+  {q:"Inventarizatsiyada topilgan AV kirim qilindi. To'g'ri provodka qaysi?", opts:["Dt 0100 — Kt 8530","Dt 0100 — Kt 9390","Dt 0820 — Kt 9390","Dt 0100 — Kt 4610"], correct:1},
+  {q:"AV kamomadidan zarar aks ettirildi. To'g'ri provodka qaysi?", opts:["Dt 9430 — Kt 9210","Dt 5910 — Kt 9210","Dt 9210 — Kt 9430","Dt 9210 — Kt 5910"], correct:0},
+];
+
+// ============ RENDER TESTS ============
+function shuffleOptions(q) {
+  // Shuffle options while tracking correct answer
+  const indices = q.opts.map((_, i) => i);
+  for (let i = indices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indices[i], indices[j]] = [indices[j], indices[i]];
+  }
+  const newOpts = indices.map(i => q.opts[i]);
+  const newCorrect = indices.indexOf(q.correct);
+  return { ...q, opts: newOpts, correct: newCorrect };
+}
+
+function renderTest(containerId, data) {
+  const container = document.getElementById(containerId);
+  const shuffled = data.map(q => shuffleOptions(q));
+  // Store shuffled data for checking
+  window['_' + containerId] = shuffled;
+  let html = '';
+  shuffled.forEach((q, qi) => {
+    html += '<div class="test-question" data-selected="-1" id="'+containerId+'_q'+qi+'">';
+    html += '<h4>' + (qi+1) + '. ' + q.q + '</h4>';
+    q.opts.forEach((opt, oi) => {
+      html += '<div class="test-option" onclick="selectTestOption(\''+containerId+'\','+qi+','+oi+')">' + String.fromCharCode(65+oi) + ') ' + opt + '</div>';
+    });
+    html += '</div>';
+  });
+  container.innerHTML = html;
+}
+
+function selectTestOption(containerId, qi, oi) {
+  const qEl = document.getElementById(containerId + '_q' + qi);
+  if (qEl.dataset.checked === 'true') return;
+  qEl.dataset.selected = oi;
+  qEl.querySelectorAll('.test-option').forEach((o, i) => {
+    o.classList.toggle('selected', i === oi);
+  });
+}
+
+function checkTest(testId) {
+  const containerId = testId + 'Questions';
+  const data = window['_' + containerId];
+  if (!data) return;
+  let score = 0;
+  let details = [];
+  data.forEach((q, qi) => {
+    const qEl = document.getElementById(containerId + '_q' + qi);
+    qEl.dataset.checked = 'true';
+    const selected = parseInt(qEl.dataset.selected);
+    const isCorrect = selected === q.correct;
+    if (isCorrect) score++;
+    qEl.querySelectorAll('.test-option').forEach((o, i) => {
+      o.style.cursor = 'default';
+      if (i === q.correct) o.classList.add('correct-ans');
+      if (i === selected && !isCorrect) o.classList.add('wrong-ans');
+    });
+    details.push({ q: q.q, selected, correct: q.correct, isCorrect, opts: q.opts });
+  });
+
+  const pct = Math.round(score / data.length * 100);
+  if (pct >= 80) { playCorrectSound(); launchFireworks(); }
+  else if (pct < 50) { playWrongSound(); }
+
+  let color = pct >= 80 ? 'var(--success)' : pct >= 50 ? 'var(--accent)' : 'var(--danger)';
+  let html = '<div class="card result-screen">';
+  html += '<h2>' + (pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '📚') + ' Natija: ' + score + ' / ' + data.length + '</h2>';
+  html += '<div style="color:var(--text-light)">' + pct + '% to\'g\'ri</div>';
+  html += '<div class="result-bar"><div class="result-bar-fill" style="width:'+pct+'%;background:'+color+'"></div></div>';
+  html += '</div>';
+
+  // Show wrong answers analysis
+  const wrongs = details.filter(d => !d.isCorrect);
+  if (wrongs.length > 0) {
+    html += '<div class="card"><h3>Xatolarni tahlil qiling</h3><div class="result-details">';
+    wrongs.forEach((d, i) => {
+      html += '<div class="result-item wrong-item">';
+      html += '<b>❌ ' + d.q + '</b><br>';
+      html += '<span style="color:var(--danger)">Siz tanladingiz: ' + (d.selected >= 0 ? d.opts[d.selected] : 'Tanlanmadi') + '</span><br>';
+      html += '<span style="color:var(--success)">To\'g\'ri javob: ' + d.opts[d.correct] + '</span>';
+      html += '</div>';
+    });
+    html += '</div></div>';
+  }
+
+  html += '<div style="text-align:center;margin-top:12px;"><button class="btn-check" onclick="resetTest(\''+testId+'\')">Qayta topshirish</button></div>';
+  document.getElementById(testId + 'Result').innerHTML = html;
+  document.getElementById(testId + 'Result').scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetTest(testId) {
+  const containerId = testId + 'Questions';
+  const dataKey = {test1: test1Data, test2: test2Data, test3: test3Data};
+  renderTest(containerId, dataKey[testId]);
+  document.getElementById(testId + 'Result').innerHTML = '';
+  document.getElementById(containerId).scrollIntoView({ behavior: 'smooth' });
+}
+
+// ============ INIT ============
+renderTest('test1Questions', test1Data);
+renderTest('test2Questions', test2Data);
+renderTest('test3Questions', test3Data);
+</script>
+</body>
+</html>
